@@ -19,6 +19,10 @@ def index():
 # Route for getting access token via POST request
 @app.route('/api/token', methods=['POST'])
 def get_access_token():
+
+    ## Get request parameter arguments. Not used in this method but placed here for example purposes.
+    # arguments = request.args.get(<paramenter>)
+
     # Retrieve sensitive information (like client ID and secret) from environment variables
     client_id = os.getenv('VITE_DISCORD_CLIENT_ID')
     client_secret = os.getenv('DISCORD_CLIENT_SECRET')
@@ -34,5 +38,14 @@ def get_access_token():
     # Return the access token extracted from the response in JSON format
     return response.json()['access_token']
 
+'''
+    If you want to create more paths, simply follow the same format as the get_access_token function above:
+ 
+    Decorate the function with @app.route(/api/path). The methods paramter isn't actually required but it is helpful to distinguish what methods you want to allow. 
+    Create the actual function definition as well as any logic you want to implement. 
+    If you pass parameters from the client to the here, and need to access those
+    arguments, use request.args.get(<parameter_name>) in your code. 
+  
+'''
 # Start the Flask server in debug mode
 app.run(debug=True)
